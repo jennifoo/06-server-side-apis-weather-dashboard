@@ -1,0 +1,29 @@
+#enter-city {
+  background-color: #e9ecef;
+  text-align: center;
+  margin: 50px 0;
+  padding: 50px 0;
+}
+
+#submit {
+  display: block;
+  margin: 25px auto 0 auto;
+}
+
+#data {
+  background-color: #e9ecef;
+  padding: 50px 25px;
+  margin-bottom: 50px;
+}
+
+#history {
+  background-color: #e9ecef;
+  /* height: 400px; */
+  padding: 50px 25px;
+}
+
+h3 {
+  text-align: left;
+  font-size: 14pt;
+  margin-bottom: 25px;
+}
