@@ -28,6 +28,7 @@ let $history = $("#history"); // div with h3 title "Search History"
 let $data = $("#data"); // div with h3 title "Current Weather Details"
 // let weatherData = [];
 let apiKey = "&appid=" + "a3eb3962d6ab7a827bdc360f52280af9";
+let future = $(".future")
 let future1 = $(".future1")
 let future2 = $(".future2")
 let future3 = $(".future3")
@@ -51,48 +52,67 @@ $($submit).on("click", function(event){
 
 
 function futureWeather(cityName) {
-      let apiBaseURL = "https://api.openweathermap.org/data/2.5/forecast?";
-      let finalURL = apiBaseURL + "q=" + cityName + "&temperature" + "&humidity" + "&wind" + apiKey;
+    let apiBaseURL = "https://api.openweathermap.org/data/2.5/forecast?";
+    let finalURL = apiBaseURL + "q=" + cityName + "&temperature" + "&humidity" + "&wind" + apiKey;
 
-      $.ajax({
-        url: finalURL,
-        method: "GET"
-        }).then(function(response) {
-          let result = response.list; // shorten path of response
-          console.log(result);
-
-          let tempK = $("<div>").text("Temperature (K): " + result[0].main.temp);
-          future1.append(tempK);
+    $.ajax({
+      url: finalURL,
+      method: "GET"
+      }).then(function(response) {
+        let result = response.list; // shorten path of response
+        console.log(result);
 
 
 
-        });
+          for (let i = 0; i < 5; i++){
+                let newDiv = $("<div>").attr("class", "future-div col-md-2");
+
+
+                let tempK = $("<div>").text("Temperature (K): " + result[i].main.temp);
+                newDiv.append(tempK);
+
+                let tempFcalc = (result[i].main.temp - 273.15) * 1.80 + 32;
+                let tempF = $("<div>").text("Temperature (F): " + tempFcalc.toFixed(2));
+                newDiv.append(tempF);
+
+                let humidity = $("<div>").text("Humidity: " + result[i].main.humidity);
+                newDiv.append(humidity);
+
+                let windspeed = $("<div>").text("Windspeed: " + result[i].wind.speed);
+                newDiv.append(windspeed);
+
+                future.append(newDiv);
+          }
+
+
+      });
 }
 
 
 function currentWeather(cityName) {
 //date, weather icon, temp, humidity, windspeed, UV index
-      let apiBaseURL = "https://api.openweathermap.org/data/2.5/weather?";
-      let finalURL = apiBaseURL + "q=" + cityName + "&temperature" + "&humidity" + "&weather"+ "&wind" + apiKey;
+    let apiBaseURL = "https://api.openweathermap.org/data/2.5/weather?";
+    let finalURL = apiBaseURL + "q=" + cityName + "&temperature" + "&humidity" + "&weather"+ "&wind" + apiKey;
 
-      $.ajax({
-        url: finalURL,
-        method: "GET"
-        }).then(function(response) {
-           console.log(response);
+    $.ajax({
+      url: finalURL,
+      method: "GET"
+      }).then(function(response) {
+         console.log(response);
 
-          // Convert the temp to fahrenheit
-          let tempF = (response.main.temp - 273.15) * 1.80 + 32;
-          // let iconCode = response.weather[0].icon);
-          // let iconFinal = $("<img>").attr("src", "images/" + iconCode + ".png");
+        // Convert the temp to fahrenheit
 
-          // $(".icon").text(iconFinal);
-          $(".tempK").text("Temperature (K): " + response.main.temp);
-          $(".tempF").text("Temperature (F): " + tempF.toFixed(2));
-          $(".humidity").text("Humidity: " + response.main.humidity);
-          $(".windspeed").text("Wind Speed: " + response.wind.speed);
+        // let iconCode = response.weather[0].icon);
+        // let iconFinal = $("<img>").attr("src", "images/" + iconCode + ".png");
 
-        });
+        // $(".icon").text(iconFinal);
+        $(".tempK").text("Temperature (K): " + response.main.temp);
+        let tempF = (response.main.temp - 273.15) * 1.80 + 32;
+        $(".tempF").text("Temperature (F): " + tempF.toFixed(2));
+        $(".humidity").text("Humidity: " + response.main.humidity);
+        $(".windspeed").text("Wind Speed: " + response.wind.speed);
+
+      });
 }
 
 

@@ -16,6 +16,19 @@
   margin-bottom: 50px;
 }
 
+#future-data {
+  background-color: #e9ecef;
+  padding: 50px 25px;
+  margin-bottom: 50px;
+  font-size: 10pt;
+
+}
+
+
+.future-div {
+  margin-bottom: 25px;
+}
+
 #history {
   background-color: #e9ecef;
   /* height: 400px; */
