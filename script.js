@@ -22,56 +22,85 @@ When opening up the weather dashboard, presented with the last searched city for
 
 /* ------------------------- GLOBAL VARIABLES ------------------------- */
 
-let $search = $("#search"); // search input field
+let $search = $("#search")
 let $submit = $("#submit"); // submit button
 let $history = $("#history"); // div with h3 title "Search History"
 let $data = $("#data"); // div with h3 title "Current Weather Details"
 // let weatherData = [];
-
-
-
+let apiKey = "&appid=" + "a3eb3962d6ab7a827bdc360f52280af9";
+let future1 = $(".future1")
+let future2 = $(".future2")
+let future3 = $(".future3")
+let future4 = $(".future4")
+let future5 = $(".future5")
 
 /* ------------------------- FUNCTIONS ------------------------- */
 
-// runQuery("bear", 1990, 2020);
-// api.openweathermap.org/data/2.5/forecast?q={city name}&appid={your api key}
-// let forecastURL = "api.openweathermap.org/data/2.5/forecast?";
-// – – – – –
-// api.openweathermap.org/data/2.5/weather?q={city name}&appid={your api key}
-
-let apiKey = "&appid=" + "a3eb3962d6ab7a827bdc360f52280af9";
-let cityInput ="Houston"; // user to provide this information via input field.
-let cityParam = "q=" + cityInput;
-let apiBaseURL = "https://api.openweathermap.org/data/2.5/weather?";
-
-
-function currentWeather() {
 //date, weather icon, temp, humidity, windspeed, UV index
 
+// Trigger ajax onclick
+$($submit).on("click", function(event){
+      event.preventDefault();
+      let cityName = $search.val().trim();
+       console.log(cityName);
 
-  var finalURL = apiBaseURL + cityParam + "&temperature" + "&humidity" + "&wind" + apiKey;
-  $.ajax({
-    url: finalURL,
-    method: "GET"
-    }).then(function(response) {
-      console.log(response);
+      currentWeather(cityName);
+      futureWeather(cityName);
 
-      // Convert the temp to fahrenheit
-      let tempF = (response.main.temp - 273.15) * 1.80 + 32;
+});
 
-      $(".tempK").text("Temperature (K) " + response.main.temp);
-      $(".tempF").text("Temperature (F) " + tempF.toFixed(2));
-      $(".humidity").text("Humidity: " + response.main.humidity);
-      $(".windspeed").text("Wind Speed: " + response.wind.speed);
 
-    });
+function futureWeather(cityName) {
+      let apiBaseURL = "https://api.openweathermap.org/data/2.5/forecast?";
+      let finalURL = apiBaseURL + "q=" + cityName + "&temperature" + "&humidity" + "&wind" + apiKey;
+
+      $.ajax({
+        url: finalURL,
+        method: "GET"
+        }).then(function(response) {
+          let result = response.list; // shorten path of response
+          console.log(result);
+
+          let tempK = $("<div>").text("Temperature (K): " + result[0].main.temp);
+          future1.append(tempK);
+
+
+
+        });
 }
 
 
-currentWeather();
+function currentWeather(cityName) {
+//date, weather icon, temp, humidity, windspeed, UV index
+      let apiBaseURL = "https://api.openweathermap.org/data/2.5/weather?";
+      let finalURL = apiBaseURL + "q=" + cityName + "&temperature" + "&humidity" + "&weather"+ "&wind" + apiKey;
+
+      $.ajax({
+        url: finalURL,
+        method: "GET"
+        }).then(function(response) {
+           console.log(response);
+
+          // Convert the temp to fahrenheit
+          let tempF = (response.main.temp - 273.15) * 1.80 + 32;
+          // let iconCode = response.weather[0].icon);
+          // let iconFinal = $("<img>").attr("src", "images/" + iconCode + ".png");
+
+          // $(".icon").text(iconFinal);
+          $(".tempK").text("Temperature (K): " + response.main.temp);
+          $(".tempF").text("Temperature (F): " + tempF.toFixed(2));
+          $(".humidity").text("Humidity: " + response.main.humidity);
+          $(".windspeed").text("Wind Speed: " + response.wind.speed);
+
+        });
+}
+
 
 
 // $("#emptycontentswiththisfunction").empty();
 
 
 // End
+
+// let cityParam = "q=" + $search;
+//.val().trim(); // city input field

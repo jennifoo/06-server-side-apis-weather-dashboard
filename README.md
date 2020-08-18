@@ -4,6 +4,9 @@ Developers are often tasked with retrieving data from another application's API 
 
 Use the [OpenWeather API](https://openweathermap.org/api) to retrieve weather data for cities. The documentation includes a section called "How to start" that will provide basic setup and usage instructions. Use `localStorage` to store any persistent data.
 
+View Website: https://jennifoo.github.io/06-server-side-apis-weather-dashboard/
+Github Repository: https://github.com/jennifoo/06-server-side-apis-weather-dashboard
+
 ## User Story
 
 ```
