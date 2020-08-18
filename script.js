@@ -1,32 +1,9 @@
-/* ------------------------- PSEUDO CODE ------------------------- */
-/* Create a form that lets user input the city name.
-
-  Results:
-  • Current weather conditions for the city
-      - City Name
-      - Date
-      - Icon representing weather condition
-      - The Temperature
-      - The Humidity
-      - The Wind Speed
-      - UV Index
-          * When viewing UV index, presented with color the indicates wether the conditions are favorable, moderate or severe.
-  • Future weather conditions for the city
-          * When viewing future conditions, presented with a 5-day forecasts that displays the date, an icon representation of weather conditions, the temperature, and the humidity.
-
-Add city to the search history
-          * When clicking on a city in the search history, presented with the current and future conditions for that city.
-
-When opening up the weather dashboard, presented with the last searched city forecast.
-*/
-
 /* ------------------------- GLOBAL VARIABLES ------------------------- */
 
 let $search = $("#search")
 let $submit = $("#submit"); // submit button
-let $history = $("#history"); // div with h3 title "Search History"
+let $historyResults = $("#history-results");
 let $data = $("#data"); // div with h3 title "Current Weather Details"
-// let weatherData = [];
 let apiKey = "&appid=" + "a3eb3962d6ab7a827bdc360f52280af9";
 let future = $(".future")
 
@@ -34,27 +11,36 @@ let searchHistory = [];
 
 /* ------------------------- FUNCTIONS ------------------------- */
 
-//date, weather icon, temp, humidity, windspeed, UV index
-
 // Trigger ajax onclick
 $($submit).on("click", function(event){
-      $(".future").empty(); // Empty Contents of Previous Results
+      $(future).empty(); // Empty Contents of Previous Results
+      $($historyResults).empty(); // Empty Contents of Previous Results
       event.preventDefault();
       let cityName = $search.val().trim();
 
-      searchHistory.push(cityName);
-      console.log(searchHistory);
+      searchHistory.push(cityName); // Add city name to array
 
       currentWeather(cityName);
       futureWeather(cityName);
 
-      localStorage.setItem("storage", searchHistory);
-      var storage = localStorage.getItem("storage");
-      let searchDiv = $("<div>").text(storage);
-      $history.append(searchDiv);
-
+      for (let i=0; i < searchHistory.length; i++){
+          let makeDiv = $("<button>").attr("class", "history-submit");
+          let searchItem = makeDiv.append(searchHistory[i]);
+          $historyResults.append(searchItem);
+          let key = i;
+          localStorage.setItem(i, searchHistory[i]);
+    }
 });
 
+$(document).on("click", ".history-submit", historyClick);
+
+function historyClick(){
+    event.preventDefault();
+    var getCityName = ($(this).text());
+    $(future).empty(); // Empty Contents of Previous Results
+    currentWeather(getCityName);
+    futureWeather(getCityName);
+}
 
 function futureWeather(cityName) {
     let apiBaseURL = "https://api.openweathermap.org/data/2.5/forecast?";
@@ -66,11 +52,8 @@ function futureWeather(cityName) {
       }).then(function(response) {
         let result = response.list; // shorten path of response
 
-
-
           for (let i = 0; i < 5; i++){
                 let newDiv = $("<div>").attr("class", "future-div col-md-2");
-
 
                 let tempK = $("<div>").text("Temperature (K): " + result[i].main.temp);
                 newDiv.append(tempK);
@@ -87,11 +70,8 @@ function futureWeather(cityName) {
 
                 future.append(newDiv);
           }
-
-
       });
 }
-
 
 function currentWeather(cityName) {
 //date, weather icon, temp, humidity, windspeed, UV index
@@ -103,12 +83,8 @@ function currentWeather(cityName) {
       method: "GET"
       }).then(function(response) {
 
-
-        // Convert the temp to fahrenheit
-
         // let iconCode = response.weather[0].icon);
         // let iconFinal = $("<img>").attr("src", "images/" + iconCode + ".png");
-
         // $(".icon").text(iconFinal);
         $(".tempK").text("Temperature (K): " + response.main.temp);
         let tempF = (response.main.temp - 273.15) * 1.80 + 32;
@@ -118,13 +94,3 @@ function currentWeather(cityName) {
 
       });
 }
-
-
-
-// $("#emptycontentswiththisfunction").empty();
-
-
-// End
-
-// let cityParam = "q=" + $search;
-//.val().trim(); // city input field

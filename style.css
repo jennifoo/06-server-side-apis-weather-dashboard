@@ -5,9 +5,28 @@
   padding: 50px 0;
 }
 
+button {
+  display: block;
+  background-color: initial;
+  padding: 0;
+  border: 0;
+  text-decoration: underline;
+}
+button:hover {
+  color: blue;
+}
+
+
 #submit {
   display: block;
   margin: 25px auto 0 auto;
+  border: 1px solid black;
+  padding: 4px 15px;
+  text-decoration: none;
+}
+#submit:hover {
+  color: #fff;
+  background-color: #000;
 }
 
 #data {
@@ -23,6 +42,7 @@
   font-size: 10pt;
 
 }
+
 
 
 .future-div {
