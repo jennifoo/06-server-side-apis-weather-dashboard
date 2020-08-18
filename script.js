@@ -1,3 +1,10 @@
+/*
+
+Next Steps = add city name to search Results
+Make City Name last after refresh
+
+*/
+
 /* ------------------------- GLOBAL VARIABLES ------------------------- */
 
 let $search = $("#search")
@@ -14,23 +21,45 @@ let searchHistory = [];
 // Trigger ajax onclick
 $($submit).on("click", function(event){
       $(future).empty(); // Empty Contents of Previous Results
-      $($historyResults).empty(); // Empty Contents of Previous Results
+      $(".history-submit").empty(); // Empty Contents of Previous Results
       event.preventDefault();
       let cityName = $search.val().trim();
 
-      searchHistory.push(cityName); // Add city name to array
-
-      currentWeather(cityName);
-      futureWeather(cityName);
-
-      for (let i=0; i < searchHistory.length; i++){
-          let makeDiv = $("<button>").attr("class", "history-submit");
-          let searchItem = makeDiv.append(searchHistory[i]);
-          $historyResults.append(searchItem);
-          let key = i;
-          localStorage.setItem(i, searchHistory[i]);
-    }
+      if (cityName !== null){
+              searchHistory.push(cityName); // Add city name to array
+              currentWeather(cityName);
+              futureWeather(cityName);
+              for (let i=0; i < searchHistory.length; i++){
+                  localStorage.setItem(i, searchHistory[i]);
+            }
+            reDisplayKeys();
+      }
 });
+
+function displayKeys(){
+      $(".history-submit").empty(); // Empty Contents of Previous Results
+      for (let i=0; i < 10; i++){
+              cityNameStored = localStorage.getItem(i);
+
+              if (cityNameStored !== null){
+                  searchHistory.push(cityNameStored);
+              }
+              let makeDiv = $("<button>").attr("class", "history-submit");
+              let searchItem = makeDiv.append(searchHistory[i]);
+              $historyResults.append(searchItem);
+      }
+}
+displayKeys();
+
+
+function reDisplayKeys(){
+      for (let i=0; i < searchHistory.length; i++){
+            let makeDiv = $("<button>").attr("class", "history-submit");
+            let searchItem = makeDiv.append(searchHistory[i]);
+            $historyResults.append(searchItem);
+      }
+}
+
 
 $(document).on("click", ".history-submit", historyClick);
 
