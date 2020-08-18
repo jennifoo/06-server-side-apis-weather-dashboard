@@ -29,11 +29,8 @@ let $data = $("#data"); // div with h3 title "Current Weather Details"
 // let weatherData = [];
 let apiKey = "&appid=" + "a3eb3962d6ab7a827bdc360f52280af9";
 let future = $(".future")
-let future1 = $(".future1")
-let future2 = $(".future2")
-let future3 = $(".future3")
-let future4 = $(".future4")
-let future5 = $(".future5")
+
+let searchHistory = [];
 
 /* ------------------------- FUNCTIONS ------------------------- */
 
@@ -41,12 +38,20 @@ let future5 = $(".future5")
 
 // Trigger ajax onclick
 $($submit).on("click", function(event){
+      $(".future").empty(); // Empty Contents of Previous Results
       event.preventDefault();
       let cityName = $search.val().trim();
-       console.log(cityName);
+
+      searchHistory.push(cityName);
+      console.log(searchHistory);
 
       currentWeather(cityName);
       futureWeather(cityName);
+
+      localStorage.setItem("storage", searchHistory);
+      var storage = localStorage.getItem("storage");
+      let searchDiv = $("<div>").text(storage);
+      $history.append(searchDiv);
 
 });
 
@@ -60,7 +65,6 @@ function futureWeather(cityName) {
       method: "GET"
       }).then(function(response) {
         let result = response.list; // shorten path of response
-        console.log(result);
 
 
 
@@ -98,7 +102,7 @@ function currentWeather(cityName) {
       url: finalURL,
       method: "GET"
       }).then(function(response) {
-         console.log(response);
+
 
         // Convert the temp to fahrenheit
 
