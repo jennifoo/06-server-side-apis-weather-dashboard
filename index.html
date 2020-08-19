@@ -12,19 +12,18 @@
 
 <body>
 
-
 <main class="container-fluid">
 
-        <div class="row">
+        <section class="row">
           <div class="col-12" id="enter-city">
                 <h1>Enter City</h1>
                 <input id="search">
                 <button id="submit">Submit</button>
           </div>
-        </div>
+        </section>
 
-        <div class="row">
-          <div class="col-12" id="data">
+        <section class="row section2">
+          <div class="col-6" id="data">
                 <h3>Current Weather Details</h3>
                 <div class="name"></div>
                 <div class="date"></div>
@@ -35,33 +34,27 @@
                 <div class="windspeed"></div>
                 <div class="uv"></div>
           </div>
-        </div>
 
-        <div class="row">
+          <div class="col-6" id="history">
+                <h3>Search History</h3>
+                <div id="history-results">
+                </div>
+          </div>
+        </section>
+
+
+        <section class="row">
           <div class="col-12" id="future-data">
                 <h3>Future Weather Details</h3>
                 <div class="nameDiv"></div>
-                <div class="row future">
-
-                </div>
-
+                <div class="row future"></div>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12" id="history">
-            <h3>Search History</h3>
-            <div id="history-results">
-            </div>
-          </div>
-        </div>
-
+        </section>
 
 </main>
 
-
-
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="script.js"></script>
 </body>
 

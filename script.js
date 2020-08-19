@@ -1,11 +1,7 @@
-/*
-
-Next Steps = add city name to search Results
-Make City Name last after refresh
-
-*/
 
 /* ------------------------- GLOBAL VARIABLES ------------------------- */
+
+let now = moment().format("l");
 
 let $search = $("#search")
 let $submit = $("#submit"); // submit button
@@ -17,6 +13,7 @@ let future = $(".future")
 let searchHistory = [];
 
 /* ------------------------- FUNCTIONS ------------------------- */
+
 
 // Trigger ajax onclick
 $($submit).on("click", function(event){
@@ -48,6 +45,10 @@ function displayKeys(){
               let searchItem = makeDiv.append(searchHistory[i]);
               $historyResults.append(searchItem);
       }
+
+      let lastSearchIndex = (searchHistory.length-1);
+      currentWeather(searchHistory[lastSearchIndex]);
+      futureWeather(searchHistory[lastSearchIndex]);
 }
 displayKeys();
 
@@ -81,13 +82,16 @@ function futureWeather(cityName) {
       }).then(function(response) {
         let result = response.list; // shorten path of response
         console.log(response);
-
         $(".nameDiv").empty();
         let name = $("<div>").text(response.city.name);
         $(".nameDiv").append(name);
 
+
           for (let i = 0; i < 5; i++){
                 let newDiv = $("<div>").attr("class", "future-div col-md-2");
+
+                let date = $("<div>").text(moment().add(i+1, 'days').format("l"));
+                newDiv.append(date);
 
                 let tempK = $("<div>").text("Temperature (K): " + result[i].main.temp);
                 newDiv.append(tempK);
@@ -121,7 +125,7 @@ function currentWeather(cityName) {
         // let iconFinal = $("<img>").attr("src", "images/" + iconCode + ".png");
         // $(".icon").text(iconFinal);
 
-        $(".name").text(response.name);
+        $(".name").text(response.name + " " + now);
         $(".tempK").text("Temperature (K): " + response.main.temp);
         let tempF = (response.main.temp - 273.15) * 1.80 + 32;
         $(".tempF").text("Temperature (F): " + tempF.toFixed(2));
