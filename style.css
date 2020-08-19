@@ -43,7 +43,15 @@ button:hover {
 
 }
 
+.name {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
 
+.nameDiv {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
 
 .future-div {
   margin-bottom: 25px;
@@ -58,5 +66,5 @@ button:hover {
 h3 {
   text-align: left;
   font-size: 14pt;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }

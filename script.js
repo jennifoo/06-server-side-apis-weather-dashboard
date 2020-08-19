@@ -63,7 +63,7 @@ function reDisplayKeys(){
 
 $(document).on("click", ".history-submit", historyClick);
 
-function historyClick(){
+function historyClick(event){
     event.preventDefault();
     var getCityName = ($(this).text());
     $(future).empty(); // Empty Contents of Previous Results
@@ -80,6 +80,11 @@ function futureWeather(cityName) {
       method: "GET"
       }).then(function(response) {
         let result = response.list; // shorten path of response
+        console.log(response);
+
+        $(".nameDiv").empty();
+        let name = $("<div>").text(response.city.name);
+        $(".nameDiv").append(name);
 
           for (let i = 0; i < 5; i++){
                 let newDiv = $("<div>").attr("class", "future-div col-md-2");
@@ -115,6 +120,8 @@ function currentWeather(cityName) {
         // let iconCode = response.weather[0].icon);
         // let iconFinal = $("<img>").attr("src", "images/" + iconCode + ".png");
         // $(".icon").text(iconFinal);
+
+        $(".name").text(response.name);
         $(".tempK").text("Temperature (K): " + response.main.temp);
         let tempF = (response.main.temp - 273.15) * 1.80 + 32;
         $(".tempF").text("Temperature (F): " + tempF.toFixed(2));
