@@ -128,6 +128,7 @@ function currentWeather(cityName) {
       }).then(function(response) {
 
         /* Icon */
+        $(".icon").empty();
         let iconCode = response.weather[0].icon; // Get icon ID
         let iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
         let iconFinal = $("<img>").attr("src", iconURL);
