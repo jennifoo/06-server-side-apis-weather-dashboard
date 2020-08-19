@@ -2,33 +2,35 @@ html {
   font-size: 12pt;
 }
 #enter-city {
-  background-color: #e9ecef;
+  background-color: #ddd;
   text-align: center;
   margin: 0 0 25px 0;
   padding: 50px 0;
 }
 
 #data {
-  background-color: #e9ecef;
+  background-color: #ddd;
   padding: 25px 25px;
   margin-bottom: 25px;
 }
 
 #history {
-  background-color: #e9ecef;
+  background-color: #ddd;
   /* height: 400px; */
   padding: 25px 25px;
   font-size: 10pt;
 }
 
 #future-data {
-  background-color: #e9ecef;
+  background-color: #ddd;
   padding: 25px 25px;
   margin-bottom: 50px;
   font-size: 10pt;
-
 }
-
+.section2 {
+  margin-bottom: 25px;
+  background-color: #ddd;
+}
 
 button {
   display: block;
@@ -72,10 +74,7 @@ button:hover {
 
 
 
-.section2 {
-  margin-bottom: 25px;
-  background-color: #e9ecef;
-}
+
 
 h3 {
   text-align: left;

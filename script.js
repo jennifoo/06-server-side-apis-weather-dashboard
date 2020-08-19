@@ -14,7 +14,6 @@ let searchHistory = [];
 
 /* ------------------------- FUNCTIONS ------------------------- */
 
-
 // Trigger ajax onclick
 $($submit).on("click", function(event){
       $(future).empty(); // Empty Contents of Previous Results
@@ -93,6 +92,13 @@ function futureWeather(cityName) {
                 let date = $("<div>").text(moment().add(i+1, 'days').format("l"));
                 newDiv.append(date);
 
+                /* Icon */
+                let iconCode = result[i].weather[0].icon; // Get icon ID
+                let iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
+                let iconFinal = $("<img>").attr("src", iconURL);
+                newDiv.append(iconFinal);
+                /* End Icon Code */
+
                 let tempK = $("<div>").text("Temperature (K): " + result[i].main.temp);
                 newDiv.append(tempK);
 
@@ -121,9 +127,12 @@ function currentWeather(cityName) {
       method: "GET"
       }).then(function(response) {
 
-        // let iconCode = response.weather[0].icon);
-        // let iconFinal = $("<img>").attr("src", "images/" + iconCode + ".png");
-        // $(".icon").text(iconFinal);
+        /* Icon */
+        let iconCode = response.weather[0].icon; // Get icon ID
+        let iconURL = "http://openweathermap.org/img/wn/" + iconCode + ".png";
+        let iconFinal = $("<img>").attr("src", iconURL);
+        $(".icon").append(iconFinal);
+        /* End Icon Code */
 
         $(".name").text(response.name + " " + now);
         $(".tempK").text("Temperature (K): " + response.main.temp);
