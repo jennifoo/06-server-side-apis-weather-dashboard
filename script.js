@@ -10,6 +10,7 @@ let $data = $("#data"); // div with h3 title "Current Weather Details"
 let apiKey = "&appid=" + "a3eb3962d6ab7a827bdc360f52280af9";
 let future = $(".future")
 
+
 let searchHistory = [];
 
 /* ------------------------- FUNCTIONS ------------------------- */
@@ -60,7 +61,6 @@ function reDisplayKeys(){
       }
 }
 
-
 $(document).on("click", ".history-submit", historyClick);
 
 function historyClick(event){
@@ -71,6 +71,7 @@ function historyClick(event){
     futureWeather(getCityName);
 }
 
+
 function futureWeather(cityName) {
     let apiBaseURL = "https://api.openweathermap.org/data/2.5/forecast?";
     let finalURL = apiBaseURL + "q=" + cityName + "&temperature" + "&humidity" + "&wind" + apiKey;
@@ -80,11 +81,10 @@ function futureWeather(cityName) {
       method: "GET"
       }).then(function(response) {
         let result = response.list; // shorten path of response
-        console.log(response);
+
         $(".nameDiv").empty();
         let name = $("<div>").text(response.city.name);
         $(".nameDiv").append(name);
-
 
           for (let i = 0; i < 5; i++){
                 let newDiv = $("<div>").attr("class", "future-div col-md-2");
@@ -126,7 +126,7 @@ function currentWeather(cityName) {
       url: finalURL,
       method: "GET"
       }).then(function(response) {
-
+      // console.log(response);
         /* Icon */
         $(".icon").empty();
         let iconCode = response.weather[0].icon; // Get icon ID
@@ -135,12 +135,39 @@ function currentWeather(cityName) {
         $(".icon").append(iconFinal);
         /* End Icon Code */
 
+        let latCoord = response.coord.lat;
+        let lonCoord = response.coord.lon;
+
         $(".name").text(response.name + " " + now);
         $(".tempK").text("Temperature (K): " + response.main.temp);
         let tempF = (response.main.temp - 273.15) * 1.80 + 32;
         $(".tempF").text("Temperature (F): " + tempF.toFixed(2));
         $(".humidity").text("Humidity: " + response.main.humidity);
         $(".windspeed").text("Wind Speed: " + response.wind.speed);
+        uvIndex(latCoord, lonCoord);
+      });
+}
+
+function uvIndex(lat, lon) {
+    let apiBaseURL = "http://api.openweathermap.org/data/2.5/uvi?";
+    let finalURL = apiBaseURL + apiKey + "&lat=" + lat + "&lon=" + lon;
+
+    $.ajax({
+      url: finalURL,
+      method: "GET"
+      }).then(function(response) {
+        let uvIndex = response.value;
+        $(".uv").text("UV Index: ");
+        let uvIndexDiv = $("<span>").attr("class", "uv-span").text(uvIndex);
+        $(".uv").append(uvIndexDiv);
+
+        if (uvIndex <= 2){
+          uvIndexDiv.addClass("favorable")
+        } else if (uvIndex <= 7){
+          uvIndexDiv.addClass("moderate")
+        } else {
+          uvIndexDiv.addClass("severe")
+        };
 
       });
 }

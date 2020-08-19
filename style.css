@@ -27,6 +27,26 @@ html {
   margin-bottom: 50px;
   font-size: 10pt;
 }
+
+.uv-span {
+  background-color: #000;
+  color: white;
+  padding: 2px 5px;
+}
+
+.uv-span.favorable {
+  background-color: green;
+}
+
+.uv-span.moderate {
+  background-color: yellow;
+  color: #000;
+}
+
+.uv-span.severe {
+  background-color: red;
+}
+
 .section2 {
   margin-bottom: 25px;
   background-color: #ddd;
