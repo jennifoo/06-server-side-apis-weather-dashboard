@@ -14,42 +14,55 @@
 
 <main class="container-fluid">
 
-        <section class="row">
-          <div class="col-12" id="enter-city">
-                <h1>Enter City</h1>
-                <input id="search">
-                <button id="submit">Submit</button>
-          </div>
+        <section class="row" id="title">
+            <h1>Weather Dashboard</h1>
         </section>
 
         <section class="row section2">
-          <div class="col-6" id="data">
-                <h3>Current Weather Details</h3>
-                <div class="name"></div>
-                <div class="date"></div>
-                <div class="icon"></div>
-                <div class="tempK"></div>
-                <div class="tempF"></div>
-                <div class="humidity"></div>
-                <div class="windspeed"></div>
-                <div class="uv"></div>
-          </div>
 
-          <div class="col-6" id="history">
-                <h3>Search History</h3>
-                <div id="history-results">
-                </div>
-          </div>
+                    <div class="col-sm-3">
+                          <div id="enter-city">
+                          <h2>Enter City</h2>
+                          <div id ="searchDiv"><input id="search"><button id="submit">Submit</button></div>
+                          </div>
+
+                          <div id="history">
+                          <h3>Search History</h3>
+                          <div id="history-results">
+                          </div>
+                          </div>
+
+                    </div> <!-- End Column -->
+
+              <div class="col-sm-9">
+
+                    <section class="row">
+                          <div id="data">
+                          <h3>Current Weather Details</h3>
+                          <div class="name"></div>
+                          <div class="date"></div>
+                          <div class="icon"></div>
+                          <div class="tempK"></div>
+                          <div class="tempF"></div>
+                          <div class="humidity"></div>
+                          <div class="windspeed"></div>
+                          <div class="uv"></div>
+                          </div>
+                    </section>
+
+                    <section class="row">
+
+                          <div id="future-data">
+                          <h3>Future Weather Details</h3>
+                          <div class="nameDiv"></div>
+                          <div class="row future"></div>
+                          </div>
+                    </section>
+
+              </div>
+
         </section>
 
-
-        <section class="row">
-          <div class="col-12" id="future-data">
-                <h3>Future Weather Details</h3>
-                <div class="nameDiv"></div>
-                <div class="row future"></div>
-          </div>
-        </section>
 
 </main>
 

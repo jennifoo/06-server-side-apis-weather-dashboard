@@ -7,6 +7,8 @@ The third party API named, [OpenWeather API](https://openweathermap.org/api) was
 View Website: https://jennifoo.github.io/06-server-side-apis-weather-dashboard/
 Github Repository: https://github.com/jennifoo/06-server-side-apis-weather-dashboard
 
+<img src="preview.png" alt="weather dashboard application screenshot">
+
 ## User Story
 
 ```

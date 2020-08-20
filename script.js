@@ -17,12 +17,15 @@ let searchHistory = [];
 
 // Trigger ajax onclick
 $($submit).on("click", function(event){
-      $(future).empty(); // Empty Contents of Previous Results
-      $(".history-submit").empty(); // Empty Contents of Previous Results
       event.preventDefault();
       let cityName = $search.val().trim();
+      console.log(cityName);
+      if (cityName !== null && cityName !== ""){
+              $(future).empty(); // Empty Contents of Previous Results
+              $(".history-submit").empty(); // Empty Contents of Previous Results
+      }
 
-      if (cityName !== null){
+      if (cityName !== null && cityName !== ""){
               searchHistory.push(cityName); // Add city name to array
               currentWeather(cityName);
               futureWeather(cityName);

@@ -1,31 +1,48 @@
 html {
   font-size: 12pt;
 }
+h1 {
+  font-size: 23pt;
+  margin: 0;
+  line-height: 1;
+  padding: 15px;
+}
+
+h2 { font-size: 14pt; }
+h3 {
+  text-align: left;
+  font-size: 14pt;
+  margin-bottom: 15px;
+}
+
+#title {
+  background-color: #333;
+  color: #fff;
+}
 #enter-city {
   background-color: #ddd;
-  text-align: center;
+  text-align: left;
   margin: 0 0 25px 0;
   padding: 50px 0;
 }
 
+
 #data {
   background-color: #ddd;
-  padding: 25px 25px;
+  padding: 25px 0;
   margin-bottom: 25px;
 }
 
 #history {
   background-color: #ddd;
-  /* height: 400px; */
-  padding: 25px 25px;
   font-size: 10pt;
 }
 
 #future-data {
   background-color: #ddd;
-  padding: 25px 25px;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
   font-size: 10pt;
+  width: 100%;
 }
 
 .uv-span {
@@ -52,6 +69,26 @@ html {
   background-color: #ddd;
 }
 
+#searchDiv {
+  height: 40px;
+}
+#submit {
+  display: inline;
+  margin: 0 0 0 0;
+  border: 1px solid black;
+  padding: 4px 15px;
+  text-decoration: none;
+  height: 100%;
+}
+#submit:hover {
+  color: #fff;
+  background-color: #000;
+}
+#searchDiv input {
+  height: 100%;
+}
+
+/* SEARCH HISTORY BUTTONS */
 button {
   display: block;
   background-color: initial;
@@ -62,20 +99,6 @@ button {
 button:hover {
   color: blue;
 }
-
-
-#submit {
-  display: block;
-  margin: 25px auto 0 auto;
-  border: 1px solid black;
-  padding: 4px 15px;
-  text-decoration: none;
-}
-#submit:hover {
-  color: #fff;
-  background-color: #000;
-}
-
 
 
 .name {
@@ -92,12 +115,10 @@ button:hover {
   margin-bottom: 25px;
 }
 
-
-
-
-
-h3 {
-  text-align: left;
-  font-size: 14pt;
-  margin-bottom: 15px;
+@media (min-width: 768px){
+.future-div.col-md-2 {
+    -ms-flex: 0 0 20%;
+    flex: 0 0 20%;
+    max-width: 20%;
+}
 }
